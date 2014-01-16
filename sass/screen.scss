@@ -1,0 +1,415 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+@import "compass/reset";
+@import "compass";
+@import "compass/css3";
+
+$pastel-green: #61ba96;
+$white-rule: tint($pastel-green, 30%);
+$dark-text: shade($pastel-green, 40%);
+$white: rgba(255,255,255,0.7);
+$light-green:saturate($pastel-green, 20%);
+
+
+@mixin breakpoint($point) {
+  @if $point == papa-bear {
+    @media (max-width: 960px) { @content; }
+  }
+  @else if $point == mama-bear {
+    @media (max-width: 650px) { @content; }
+  }
+  @else if $point == baby-bear {
+    @media (max-width: 400px)  { @content; }
+  }
+}
+
+
+%btn {
+	line-height:1.2em;
+	padding:10px 10px;
+	display:inline-block;
+	width:47%;
+	margin-right:2%;
+	background-color:$pastel-green;
+	text-decoration:none;
+	font-style:normal;
+	text-transform:uppercase;
+	font-family:'Raleway', sans-serif;
+	font-weight:bold;
+	color:$dark-text;
+	border-bottom:7px solid $white-rule;
+	text-align:center;
+	margin-bottom:10px;
+	&:hover {
+		opacity:.8;
+	}
+}
+
+%wrapper {
+	width:600px;
+	position:relative;
+	@include breakpoint(mama-bear) {width:90%;}
+	@include breakpoint(baby-bear) {min-width:300px;};
+	margin:0 auto;
+}
+
+* {
+	@include box-sizing(border-box);
+}
+
+body {
+	margin: 0 auto;
+  	@include box-sizing(border-box);
+  	font-family: 'Raleway', sans-serif;
+  	color: $white;
+  	 background-color: $pastel-green;
+}
+
+// Top Section logo 
+.name-container {
+	display:inline-block;
+	position:relative;
+	margin:0 auto;
+	margin-top:20px;
+}
+
+header {
+  font-weight:400;
+  color:white;
+  text-align:center;
+  background-color: $pastel-green;
+  font-family: 'Noto Serif', serif;
+ }
+
+.names { 
+  width:200px;
+  display:block;
+  
+  &:before {
+	    position:absolute;
+	    left:0;
+	    top:6px;
+	    font-weight:400;
+	    font-size:34px;
+	    content:"ngebretsen";
+	    display:block;
+	    @include opacity(0);
+	    font-family: 'Noto Serif', serif;
+	    @include transition-property(opacity);
+	    @include transition-duration(.7s);    
+	}
+  
+    .logo {
+		background-image: url('../img/HBlogo-circle.png');
+		width:55px;
+		height:55px;
+		display:inline-block;
+		vertical-align:middle;
+		@include transition-property(all);
+		@include transition-duration(.5s); 
+  	}
+  
+  &:hover, &.clicked {
+		cursor:pointer;
+
+		&:before {
+			@include opacity(1);
+		}
+
+		 .first-name {
+		 	@include opacity(0);
+		 }
+		  
+		 .logo {
+		    margin-left:-228px;
+		    @include rotate(-90deg);
+		    background-image: url('../img/HBlogo.png');
+		    
+		    .last-name {
+		    	@include opacity(1);
+		   	}
+		 }
+ 	}
+  
+  .first-name {
+	font-size: 18px;
+	vertical-align:middle;
+	font-weight:400;
+	font-style:italic;
+	letter-spacing:2px;
+	position:relative;
+	@include transition-property(opacity);
+	@include transition-duration(.5s); 
+  }
+}
+
+// Intro Section
+.intro {
+	@extend %wrapper;
+	text-align:center;
+	padding:20px 0px;
+	color: $white;
+	margin-top:20px;
+	border-top:2px dashed $white-rule;
+	border-bottom:2px dashed $white-rule;
+
+	h2 {
+		font-family:'Raleway', sans-serif; 
+		font-size:29px;
+		text-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
+	}
+}
+.rsvp-wrap {
+	@extend .intro;
+	a {
+		color:$white;
+		text-decoration:none;
+		&:hover {text-decoration:underline;}
+	}
+}
+.expand_content {
+	background-color:$dark-text;
+	min-height:200px;
+	display:none;
+	position:absolute;
+	top:115px;
+	left:0;
+	width:100%;
+	@include border-radius (3px);
+
+	h3 {
+		text-align:left;
+		padding-left:40px;
+		font-size:43px;
+		margin-bottom:20px;
+		padding-left:80px;
+		padding-top:3px;
+		
+		span {
+			font-size:18px;
+			display:block;
+			text-transform:uppercase;
+			font-weight:normal;
+		}
+	}
+	
+	&:before {
+		content:"";
+		display:block;
+		width: 0; 
+		height: 0; 
+		border-left: 15px solid transparent;
+		border-right: 15px solid transparent;
+		border-bottom: 20px solid $dark-text;
+		top:-20px;
+		left:13%;
+		position:absolute;
+	}
+	
+	li:nth-child(2) & {
+			&:before {
+			left:46%;
+			}
+		}
+
+	li:nth-child(3) & {
+		&:before {
+		left:80%;
+		}
+	}
+}
+
+
+
+// Info Section
+#info {
+	@extend %wrapper;
+	position:relative;
+	
+	li {
+		list-style:none;
+		margin-top:5px;
+		border-right:1px solid $white-rule;
+		width:32%;
+		text-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
+		display:inline-block;
+		text-align:center;
+		font-size:29px;
+		padding: 30px 0px;
+		
+		&:nth-child(3) {
+			border-right:none;
+		}
+
+		a {
+			text-decoration:none; 
+			color:$white;
+			span {font-size:11px;text-transform:uppercase; display:block;};
+			@include breakpoint(baby-bear) { font-size:80%; font-weight:bolder;};
+		}
+
+		p {
+			line-height:1.2em;
+		}
+	}
+		
+	article {
+		background-repeat:no-repeat;
+		font-family: 'Noto Serif', serif;
+		background-position:20px 20px;
+		padding:20px;
+		text-align:left;
+		font-size:16px;
+		
+		a {
+			text-decoration:underline; 
+			font-style:italic;
+			@include breakpoint(baby-bear) { font-size:100%; font-weight:normal;};
+		}
+	}	
+}
+
+.left-content {
+	display:inline-block;
+	width:60%;
+	@include breakpoint(baby-bear) {width:100%;display:block;}
+}
+
+.right-content {
+	display:inline-block;
+	float:right;
+	width:35%;
+	border: 2px solid $white-rule;
+	max-height:158px;
+	position:relative;
+	overflow:hidden;
+	@include breakpoint(baby-bear) {width:100%;display:block; margin-top:20px;max-height:90px; overflow:hidden;}
+
+	img {
+		text-align:right;
+		min-width:100%;
+	}
+}
+
+#info .stay {
+	article {
+		background-image: url('../img/icon-lamp.png');
+		padding-top:18px;
+		padding-left: 30px;
+
+		h3 {
+			padding-left:60px;
+		}
+	}
+}
+
+#info .travel {
+	article {
+		background-image: url('../img/icon-map.png');
+		padding-top:18px;
+		padding-left: 30px;
+
+		.left-content {
+			width:100%;
+			margin-bottom:15px;
+		}
+		.right-content {
+			width:100%;
+			border:none;
+
+			img {
+				@include breakpoint(baby-bear) {margin-left:-152px;}
+			}
+		}
+	
+		h3 {
+			padding-left:60px;
+		}
+	}
+}
+#info .bring {
+	article {
+		background-image: url('../img/icon-hand.png');
+		background-position:20px 0px;
+		padding-top:18px;
+		padding-left: 30px;
+
+		a {
+			@extend %btn;
+		}
+
+		.left-content {
+			width:100%;
+			margin-bottom:15px;
+		}
+		.right-content {
+			width:100%;
+			border:none;
+
+			img {
+				@include breakpoint(baby-bear) {margin-left:-152px;}
+			}
+		}
+
+		h3 {
+			padding-left:60px;
+			span {
+				font-size:16px;
+				display:inline-block;
+				vertical-align:middle;
+			}
+		}
+	}
+}
+//! Party Button forked from Timo Hausmann http://codepen.io/timohausmann
+	#party {
+		height:400px;
+		width:100%;
+		position:relative;
+	}
+	#myCanvas {
+		display: block;
+		position:absolute;
+		z-index:-1;
+		top:0;
+	}
+
+	#button {
+		font-family: helvetica, Calibri, sans-serif;
+		position: absolute;
+		font-size: 1.3em;
+		text-transform: uppercase;
+		padding: 7px 5px 10px 1px;
+		left: 50%;
+		top:25%;
+		width: 200px;
+		margin-left: -100px;
+		border-radius: 10px;
+		color: white;
+		text-shadow: -1px -1px 1px rgba(0,0,0,0.8);
+		border: 5px solid transparent;
+		border-bottom-color: rgba(0,0,0,0.35);
+		background: hsla(260, 100%, 50%, 1);
+		cursor: pointer;
+		animation: pulse 1s infinite alternate;
+		transition: background 0.4s, border 0.2s, margin 0.2s;
+	  
+	  span {
+	    display:block;
+	    font-size:.7em;
+	  }
+	}
+
+	#button:hover {
+		background: hsla(220, 100%, 60%, 1);
+		margin-top: -1px;
+		animation: none;
+	}
+
+	#button:active {
+		border-bottom-width: 0;
+		margin-top: 5px;
+	}
