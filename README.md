@@ -1,4 +1,4 @@
-[HansAndBailey.com](http://DanielMall.com)
+[HansAndBailey.com](http://hansandbailey.com)
 =============
 
 The source for [HansAndBailey.com](http://hansandbailey.com).
